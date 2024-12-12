@@ -1,0 +1,35 @@
+<!--templates/blog/blog_list.html-->
+
+{% extends 'base.html' %}
+
+{% block container %}
+
+<div class="row">
+    {% for post in posts %}
+    {% if post.votes == 0 %}
+    <div class="col-sm-6 mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body | truncatechars:50 }}</p>
+<div class="row">
+<form action = "{% url 'blog:like_post' post.pk %}" method ="POST">
+{% csrf_token %}
+<button type = "submit", name = "post_id", value = "{{ post.id }}" class="btn btn-success">YES </button> 
+</form>
+
+<form action = "{% url 'blog:dislike_post' post.pk %}" method ="POST">
+    {% csrf_token %}
+    <button type = "submit", name = "post_id_no", value = "{{ post.id }}" class="btn btn-danger">NO</button> 
+</form>
+<a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a>
+</div>
+</div>
+</div>
+</div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+
+{% endblock %}
