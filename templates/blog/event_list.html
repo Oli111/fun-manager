@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<h1>Event Lists</h1>
+<ul>
+    {% for event_list in event_lists %}
+        <li><a href="{{ event_list.get_absolute_url }}">{{ event_list.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
