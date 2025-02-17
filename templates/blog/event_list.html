@@ -2,9 +2,18 @@
 
 {% block container %}
 <h1>Event Lists</h1>
-<ul>
+
+<div class="list-group">
     {% for event_list in event_lists %}
-        <li><a href="{{ event_list.get_absolute_url }}">{{ event_list.name }}</a></li>
+        <a href="{{ event_list.get_absolute_url }}" class="list-group-item list-group-item-action">
+            {{ event_list.name }}
+        </a>
+    {% empty %}
+        <p>No event lists available.</p>
     {% endfor %}
-</ul>
+</div>
+
+<!-- Button to create a new EventList -->
+<a href="{% url 'blog:event_list_create' %}" class="btn btn-primary mt-3">Create New Event List</a>
+
 {% endblock %}
